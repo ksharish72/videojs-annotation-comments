@@ -54,3 +54,14 @@ p {
 .hidden {
   display: none;
 }
+
+#video_wrap {
+  display: -webkit-inline-box;
+}
+
+.video-js .vjs-time-control {
+    display: block;
+}
+.video-js .vjs-remaining-time {
+    display: none;
+}
