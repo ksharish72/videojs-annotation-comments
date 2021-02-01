@@ -163,7 +163,7 @@
           id +
           '" class="video-js" controls preload="auto" width="600" height="405" data-setup="{}">';
         html +=
-          '<source src="testmovie.mkv" type="video/mp4"></video>';
+          '<source src="contently-platform-overview.mp4" type="video/mp4"></video>';
         html += "</div>";
 
         var $lastVid = $(".vwrap:last");
@@ -174,7 +174,6 @@
         }
 
         firstPlayer = window.videojs("vid-" + id, playerOptions);
-        
 
         firstPlayer.ready(function() {
           var plugin = firstPlayer.annotationComments(pluginOptions);
@@ -200,9 +199,9 @@
         html +=
           '<video id="vid-' +
           id +
-          '" class="video-js" controls preload="auto" width="600" height="405" data-setup="{}">';
+          '" class="video-js preview-video" controls preload="auto" width="600" height="405" data-setup="{}">';
         html +=
-          '<source src="testmovie.mkv" type="video/mp4"></video>';
+          '<source src="contently-platform-overview.mp4" type="video/mp4"></video>';
         html += "</div>";
 
         var $lastVid = $(".vwrap:last");
@@ -211,16 +210,23 @@
         } else {
           $("#video_wrap").prepend(html);
         }
-
-        secondPlayer = window.videojs("vid-" + id, playerOptions);
+        var secondPlayerOptions={
+              controlBar: {
+                volumeControl: false,
+                playToggle: false,
+                progressControl: {
+                  seekBar: false
+                }
+              },
+        }
+        secondPlayer = window.videojs("vid-" + id, secondPlayerOptions);
         
         secondPlayer.ready(function() {
           secondPlayer.muted(true);
 
           videos.push({
             id: id,
-            player: secondPlayer,
-            plugin: plugin
+            player: secondPlayer
           });
           console.log("::ADDING:: ", videos[videos.length - 1]);
         });
@@ -239,11 +245,12 @@
       var firstPlayer;
       var secondPlayer;
       // Add initial video
-      ADD();
+       ADD();
       //addadvancedvideo
-      ADDAdvancedVideo();
+     ADDAdvancedVideo();
 
-      var skipSeconds=600;
+
+      var skipSeconds=30;
       secondPlayer.currentTime(skipSeconds)
       // on click the center part of the video
       firstPlayer.on('play',function(event){
@@ -252,6 +259,8 @@
       firstPlayer.on('pause',function(event){
          secondPlayer.pause(); 
       })
+
+    
 
       // play both players with advanced preview in second video
       firstPlayer.controlBar.playToggle.on("click",function(event){

@@ -65,3 +65,9 @@ p {
 .video-js .vjs-remaining-time {
     display: none;
 }
+.preview-video{
+  pointer-events: none;
+}
+.vjs-big-play-button{
+  display: none !important;
+}
