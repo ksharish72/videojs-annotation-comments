@@ -9,6 +9,7 @@ export default class VideoPlayer extends React.Component {
   componentDidMount() {
     //register plugin
     videojs.registerPlugin("annotationComments", AnnotationComments(videojs));
+    console.log(this.videoNode);
     // instantiate Video.js
     this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
       console.log("onPlayerReady", this);

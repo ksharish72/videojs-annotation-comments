@@ -13,20 +13,7 @@
             .toString(16)
             .substring(1);
         }
-        return (
-          s4() +
-          s4() +
-          "-" +
-          s4() +
-          "-" +
-          s4() +
-          "-" +
-          s4() +
-          "-" +
-          s4() +
-          s4() +
-          s4()
-        );
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
       }
       var annotations = [
         {
@@ -45,9 +32,9 @@
             {
               id: guid(),
               meta: {
-                datetime: "2017-03-28T19:17:32.238Z",
+                datetime: '2017-03-28T19:17:32.238Z',
                 user_id: 1,
-                user_name: "Jack Pope"
+                user_name: 'Jack Pope'
               },
               body:
                 'Is the "Stories API" the only API we want to highlight here? It makes the system feel a little limited, even though we have robust functionality and multiple APIs'
@@ -67,20 +54,20 @@
           },
           comments: [
             {
-              id: "2854a682-ffdf-78a4-796d-22abb6d9cac3",
+              id: '2854a682-ffdf-78a4-796d-22abb6d9cac3',
               meta: {
-                datetime: "2017-03-28T19:18:25.485Z",
+                datetime: '2017-03-28T19:18:25.485Z',
                 user_id: 2,
-                user_name: "Evan Carothers"
+                user_name: 'Evan Carothers'
               },
-              body: "Can we replace this logo with Microsoft?"
+              body: 'Can we replace this logo with Microsoft?'
             },
             {
               id: guid(),
               meta: {
-                datetime: "2017-03-29T00:18:25.485Z",
+                datetime: '2017-03-29T00:18:25.485Z',
                 user_id: 1,
-                user_name: "Jack Pope"
+                user_name: 'Jack Pope'
               },
               body:
                 "Great idea Evan, that's a SUPER recognizable brand!\n\nAny other major company brands we are missing in this shot?"
@@ -95,14 +82,14 @@
           shape: null,
           comments: [
             {
-              id: "e0b9787b-fbe7-f1e9-5134-d0eb69a783aa",
+              id: 'e0b9787b-fbe7-f1e9-5134-d0eb69a783aa',
               meta: {
-                datetime: "2017-03-28T19:21:41.351Z",
+                datetime: '2017-03-28T19:21:41.351Z',
                 user_id: 1,
-                user_name: "Jack Pope"
+                user_name: 'Jack Pope'
               },
               body:
-                "Can we have a music change for this final section that transitions towards the final frame? Some sweet heavy rock 80s ballad?"
+                'Can we have a music change for this final section that transitions towards the final frame? Some sweet heavy rock 80s ballad?'
             }
           ]
         },
@@ -114,11 +101,11 @@
           shape: null,
           comments: [
             {
-              id: "e0b9787b-fbe7-f1e9-5134-d0eb69a783aa",
+              id: 'e0b9787b-fbe7-f1e9-5134-d0eb69a783aa',
               meta: {
-                datetime: "2017-03-28T19:21:41.351Z",
+                datetime: '2017-03-28T19:21:41.351Z',
                 user_id: 2,
-                user_name: "Evan Carothers"
+                user_name: 'Evan Carothers'
               },
               body:
                 "The music is a little loud through this section and distracts from the content and narration a bit - can we tone 'er down a couple nocks here?"
@@ -129,8 +116,9 @@
     </script>
   </head>
   <body>
-    <div id="video_wrap">
-    </div>
+    <input type="file" name="file" id="fileItem" onchange="onChange()" />
+
+    <div id="video_wrap"></div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="/video.js/dist/video.min.js"></script>
@@ -145,7 +133,7 @@
           bindArrowKeys: true,
           meta: {
             user_id: 2,
-            user_name: "John Smith"
+            user_name: 'John Smith'
           },
           showControls: true,
           showCommentList: true,
@@ -161,25 +149,25 @@
         html +=
           '<video id="vid-' +
           id +
-          '" class="video-js" controls preload="auto" width="600" height="405" data-setup="{}">';
-        html +=
-          '<source src="contently-platform-overview.mp4" type="video/mp4"></video>';
-        html += "</div>";
+          '" class="video-js" controls preload="auto" width="600" height="405" data-setup="{}"></video>';
+        html += '</div>';
 
-        var $lastVid = $(".vwrap:last");
+        var $lastVid = $('.vwrap:last');
         if ($lastVid.length) {
           $lastVid.after(html);
         } else {
-          $("#video_wrap").prepend(html);
+          $('#video_wrap').prepend(html);
         }
 
-        firstPlayer = window.videojs("vid-" + id, playerOptions);
+        firstPlayer = window.videojs('vid-' + id, playerOptions);
 
-        firstPlayer.ready(function() {
+        firstPlayer.ready(function () {
+          this.src({ type: fileType, src: videoObject });
+          this.load();
           var plugin = firstPlayer.annotationComments(pluginOptions);
 
-          plugin.onReady(function() {
-            console.log("PLUGIN IS READY!", id);
+          plugin.onReady(function () {
+            console.log('PLUGIN IS READY!', id);
           });
           firstPlayer.muted(true);
 
@@ -188,7 +176,7 @@
             player: firstPlayer,
             plugin: plugin
           });
-          console.log("::ADDING:: ", videos[videos.length - 1]);
+          console.log('::ADDING:: ', videos[videos.length - 1]);
         });
       }
 
@@ -199,90 +187,96 @@
         html +=
           '<video id="vid-' +
           id +
-          '" class="video-js preview-video" controls preload="auto" width="600" height="405" data-setup="{}">';
-        html +=
-          '<source src="contently-platform-overview.mp4" type="video/mp4"></video>';
-        html += "</div>";
+          '" class="video-js preview-video" controls preload="auto" width="600" height="405" data-setup="{}"></video>';
+        html += '</div>';
 
-        var $lastVid = $(".vwrap:last");
+        var $lastVid = $('.vwrap:last');
         if ($lastVid.length) {
           $lastVid.after(html);
         } else {
-          $("#video_wrap").prepend(html);
+          $('#video_wrap').prepend(html);
         }
-        var secondPlayerOptions={
-              controlBar: {
-                volumeControl: false,
-                playToggle: false,
-                progressControl: {
-                  seekBar: false
-                }
-              },
-        }
-        secondPlayer = window.videojs("vid-" + id, secondPlayerOptions);
-        
-        secondPlayer.ready(function() {
+        var secondPlayerOptions = {
+          controlBar: {
+            volumeControl: false,
+            playToggle: false,
+            progressControl: {
+              seekBar: false
+            }
+          }
+        };
+        secondPlayer = window.videojs('vid-' + id, secondPlayerOptions);
+
+        secondPlayer.ready(function () {
+          this.src({ type: fileType, src: videoObject });
+          this.load();
+
           secondPlayer.muted(true);
 
           videos.push({
             id: id,
             player: secondPlayer
           });
-          console.log("::ADDING:: ", videos[videos.length - 1]);
+          console.log('::ADDING:: ', videos[videos.length - 1]);
         });
       }
 
       function REMOVE(id) {
-        var video = videos.find(function(v) {
+        var video = videos.find(function (v) {
           return v.id == id;
         });
-        console.log("::REMOVING:: ", video);
+        console.log('::REMOVING:: ', video);
         video.plugin = video.plugin.dispose();
         video.player.dispose();
-        $("#wrap-" + video.id).remove();
+        $('#wrap-' + video.id).remove();
       }
 
+      function onChange() {
+        var fileItem = document.getElementById('fileItem');
+        var files = fileItem.files;
+        var file = files[0];
+        fileType = file.type;
+        var urlBlob = URL.createObjectURL(file);
+        videoObject = urlBlob;
+        ADD();
+        ADDAdvancedVideo();
+
+        var skipSeconds = 60;
+        secondPlayer.currentTime(skipSeconds);
+        // on click the center part of the video
+        firstPlayer.on('play', function (event) {
+          secondPlayer.play();
+        });
+        firstPlayer.on('pause', function (event) {
+          secondPlayer.pause();
+        });
+
+        // play both players with advanced preview in second video
+        firstPlayer.controlBar.playToggle.on('click', function (event) {
+          if (firstPlayer.paused()) {
+            console.log('video in pause mode');
+            //if video is in pause mode
+            secondPlayer.pause();
+          } else {
+            console.log('video in play mode');
+            //if video is in play mode
+            secondPlayer.play();
+          }
+        });
+
+        //on clicking the progresscontrol bar
+        firstPlayer.controlBar.progressControl.on('click', function (event) {
+          console.log('progress');
+          var firstPlayerCurrentTime = firstPlayer.currentTime();
+          var afterSkipTime = firstPlayerCurrentTime + skipSeconds;
+          secondPlayer.currentTime(afterSkipTime);
+        });
+      }
+
+      var fileType = '';
+      var videoObject = {};
       var firstPlayer;
       var secondPlayer;
-      // Add initial video
-       ADD();
-      //addadvancedvideo
-     ADDAdvancedVideo();
-
-
-      var skipSeconds=30;
-      secondPlayer.currentTime(skipSeconds)
-      // on click the center part of the video
-      firstPlayer.on('play',function(event){
-         secondPlayer.play(); 
-      })
-      firstPlayer.on('pause',function(event){
-         secondPlayer.pause(); 
-      })
-
-    
-
-      // play both players with advanced preview in second video
-      firstPlayer.controlBar.playToggle.on("click",function(event){
-      if(firstPlayer.paused()){
-        console.log("video in pause mode")
-        //if video is in pause mode
-       secondPlayer.pause();
-      }
-      else{
-        console.log("video in play mode")
-        //if video is in play mode
-        secondPlayer.play();
-      }
-      })
-      
-      //on clicking the progresscontrol bar
-      firstPlayer.controlBar.progressControl.on('click',function(event){
-        console.log("progress")
-        var firstPlayerCurrentTime=firstPlayer.currentTime();
-        var afterSkipTime=firstPlayerCurrentTime+skipSeconds;
-        secondPlayer.currentTime(afterSkipTime);
-      })
     </script>
   </body>
 </html>
